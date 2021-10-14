@@ -1,0 +1,7 @@
+{
+  "Name":"Mason MMO Game",
+  "Host":"0.0.0.0",
+  "TcpPort":12121,
+  "MaxConn":3000,
+  "WorkerPoolSize":10
+}

@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package mmopb;
+
+// 同步客户端玩家id
+message SyncPlayerId {
+    int32 player_id = 1;
+}
+
+// 玩家位置
+message Position {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+    float v = 4;
+}
+
+enum BroadCastType {
+    Unspecified = 0;    // 未定义
+    World_Chat = 1;     // 世界聊天
+    Player_Pos = 2;     // 玩家位置
+    Player_Action = 3;  // 动作
+    After_Move = 4;     // 移动之后坐标信息更新
+}
+
+// 玩家广播数据
+message BroadCast {
+    int32 player_id = 1;
+    BroadCastType type = 2;
+    oneof Data {
+        string content = 3;
+        Position pos = 4;
+        int32 action = 5;
+    }
+}
+
+// 玩家聊天数据
+message Talk {
+    int32 target_player_id = 1; // 目标玩家，如果<=0，则表示全服聊天
+    string content = 2;         // 内容
+}
+
+// 玩家信息
+message Player {
+    int32 player_id = 1;
+    Position pos = 2;
+}
+
+// 同步玩家显示数据
+message SyncPlayers {
+    repeated Player players = 1;
+}
